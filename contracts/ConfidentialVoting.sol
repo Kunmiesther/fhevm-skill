@@ -18,8 +18,13 @@ contract ConfidentialVoting is ZamaEthereumConfig {
     event VoteCast(address indexed voter);
     event VotingFinalized();
 
+    modifier onlyOwner() {
+        require(msg.sender == owner, "Only owner");
+        _;
+    }
+
     constructor(uint256 durationSeconds) {
-        owner    = msg.sender;
+        owner = msg.sender;
         deadline = block.timestamp + durationSeconds;
 
         _votesYes = FHE.asEuint32(0);
@@ -30,6 +35,7 @@ contract ConfidentialVoting is ZamaEthereumConfig {
 
     function castVote(externalEuint8 encVote, bytes calldata inputProof) external {
         require(block.timestamp < deadline, "Voting ended");
+        require(!finalized, "Finalized");
         require(!hasVoted[msg.sender], "Already voted");
 
         hasVoted[msg.sender] = true;
@@ -47,9 +53,9 @@ contract ConfidentialVoting is ZamaEthereumConfig {
         emit VoteCast(msg.sender);
     }
 
-    /// @notice After deadline, mark tallies as publicly decryptable.
-    ///         Anyone can then decrypt them via the KMS gateway.
-    function finalizeVoting() external {
+    /// @notice After the deadline, mark tallies as publicly decryptable.
+    /// @dev Anyone can decrypt them via the KMS gateway tooling (off-chain).
+    function finalizeVoting() external onlyOwner {
         require(block.timestamp >= deadline, "Voting still ongoing");
         require(!finalized, "Already finalized");
 
@@ -57,6 +63,9 @@ contract ConfidentialVoting is ZamaEthereumConfig {
 
         FHE.makePubliclyDecryptable(_votesYes);
         FHE.makePubliclyDecryptable(_votesNo);
+        // Owner can decrypt final tallies (useful for tests / admin UI).
+        FHE.allow(_votesYes, owner);
+        FHE.allow(_votesNo, owner);
 
         emit VotingFinalized();
     }

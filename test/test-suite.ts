@@ -148,6 +148,34 @@ describe("ConfidentialVoting", function () {
 
         expect(await voting.hasVoted(voter1.address)).to.be.true;
     });
+
+    it("owner can finalize and make tallies publicly decryptable", async function () {
+        // voter1 votes yes (1)
+        const v1 = await fhevm.createEncryptedInput(votingAddress, voter1.address);
+        v1.add8(1n);
+        const { handles: h1, inputProof: p1 } = await v1.encrypt();
+        await voting.connect(voter1).castVote(h1[0], p1);
+
+        // voter2 votes no (0)
+        const v2 = await fhevm.createEncryptedInput(votingAddress, voter2.address);
+        v2.add8(0n);
+        const { handles: h2, inputProof: p2 } = await v2.encrypt();
+        await voting.connect(voter2).castVote(h2[0], p2);
+
+        // advance time past deadline
+        await ethers.provider.send("evm_increaseTime", [3601]);
+        await ethers.provider.send("evm_mine", []);
+
+        await expect(voting.connect(owner).finalizeVoting())
+            .to.emit(voting, "VotingFinalized");
+
+        // Tallies are still encrypted handles; in mock mode we can decrypt for assertion.
+        const [encYes, encNo] = await voting.getEncryptedTallies();
+        const yes = await fhevm.userDecryptEuint(FhevmType.euint32, encYes, votingAddress, owner);
+        const no = await fhevm.userDecryptEuint(FhevmType.euint32, encNo, votingAddress, owner);
+        expect(yes).to.equal(1);
+        expect(no).to.equal(1);
+    });
 });
 
 describe("ConfidentialAuction", function () {
