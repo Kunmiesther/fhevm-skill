@@ -1,4 +1,4 @@
-# 🔐 FHEVM Skill — AI Agent Reference for Confidential Smart Contracts
+# FHEVM Skill — AI Agent Reference for Confidential Smart Contracts
 
 ![FHEVM](https://img.shields.io/badge/FHEVM-Zama%20Protocol-6C3CE1?style=for-the-badge&logo=ethereum&logoColor=white)
 ![Solidity](https://img.shields.io/badge/Solidity-0.8.27-363636?style=for-the-badge&logo=solidity&logoColor=white)
@@ -9,7 +9,7 @@
 
 ---
 
-## 🧠 What Is This?
+## What Is This?
 
 AI coding agents are becoming the primary way developers write smart contracts. But today, no agent has built-in knowledge of Fully Homomorphic Encryption or FHEVM.
 
@@ -25,7 +25,7 @@ Load `SKILL.md` into your AI coding environment, and prompts like:
 
 ---
 
-## ✅ Validated In Production
+## Validated In Production
 
 This skill was built and battle-tested while building **[Sentra Protocol](https://sentra-protocol.vercel.app)** — a live application on Ethereum that enables confidential proof-of-solvency.
 
@@ -36,7 +36,7 @@ Every pattern in this skill reflects real code that compiles, deploys, and works
 
 ---
 
-## 📁 File Structure
+## File Structure
 
 ```
 fhevm-skill/
@@ -65,7 +65,7 @@ fhevm-skill/
 
 ---
 
-## 🚀 How to Use With Your AI Agent
+## How to Use With Your AI Agent
 
 ### Claude Code
 ```bash
@@ -86,7 +86,7 @@ Using the FHEVM skill files in this project, write a confidential voting contrac
 
 ---
 
-## 📚 Topics Covered
+## Topics Covered
 
 ![Architecture](https://img.shields.io/badge/FHE%20Architecture-6C3CE1?style=flat-square)
 ![Encrypted Types](https://img.shields.io/badge/Encrypted%20Types-0ea5e9?style=flat-square)
@@ -101,7 +101,7 @@ Using the FHEVM skill files in this project, write a confidential voting contrac
 
 ---
 
-## ⚠️ The Anti-Patterns File
+## The Anti-Patterns File
 
 `skills/10_antipatterns.md` is the most important file in this repo.
 
@@ -117,7 +117,7 @@ None of these are in the official docs. They were found by running real code.
 
 ---
 
-## 🧪 Running the Tests
+## Running the Tests
 
 ```bash
 # Install dependencies
@@ -154,7 +154,7 @@ ConfidentialAuction
 
 ---
 
-## 🔗 Resources
+## Resources
 
 | Resource | Link |
 |----------|------|
@@ -166,7 +166,7 @@ ConfidentialAuction
 
 ---
 
-## 👤 Author
+## Author
 
 Built by **Estar Kunmi** for the Zama Builders Program S2 — Bounty Track.
 
