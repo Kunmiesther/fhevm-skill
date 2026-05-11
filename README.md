@@ -163,11 +163,11 @@ ConfidentialAuction
 | OpenZeppelin Confidential Contracts | https://github.com/OpenZeppelin/openzeppelin-confidential-contracts |
 | fhevmjs | https://github.com/zama-ai/fhevmjs |
 | Sentra Protocol (live demo) | https://sentra-protocol.vercel.app |
-
+| FHEVM Skill (demo video) | https://youtu.be/JjJZQuOT91A?si=vEDdecWJuE5tb2xm |
 ---
 
 ## Author
 
-Built by **Estar Kunmi** for the Zama Builders Program S2 — Bounty Track.
+Built by **Estar Kunmi** for the Zama Developer Program S2 — Bounty Track.
 
 ![Zama](https://img.shields.io/badge/Zama%20Builders%20Program-S2-6C3CE1?style=for-the-badge)
